@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar({ user, onLogout }) {
@@ -17,36 +17,37 @@ export default function Navbar({ user, onLogout }) {
 
         {/* Left Navigation */}
         <nav className="nav-btn1">
-          <button className="home" onClick={() => navigate("/")}>Home</button>
-          <button className="community" onClick={() => navigate("/community")}>Community</button>
+          <NavLink to="/" className="nav-item">Home</NavLink>
+          <NavLink to="/community" className="nav-item">Community</NavLink>
 
-          {/* citizen */}
+          {/* Citizen */}
           {user && user.role === "citizen" && (
             <>
-              <button className="nav-link" onClick={() => navigate("/raise-request")}>Raise Request</button>
-              <button className="nav-link" onClick={() => navigate("/my-requests")}>My Requests</button>
+              <NavLink to="/raise-request" className="nav-item">Raise Request</NavLink>
+              <NavLink to="/my-requests" className="nav-item">My Requests</NavLink>
             </>
           )}
 
-          {/*operator */}
+          {/* Operator */}
           {user && user.role === "operator" && (
-            <button className="nav-link" onClick={() => navigate("/assigned")}>Assigned</button>
+            <NavLink to="/assigned" className="nav-item">Assigned</NavLink>
           )}
 
-          {/* ward admin*/}
+          {/* Ward Admin */}
           {user && (user.role === "ward admin" || user.role === "wardAdmin") && (
             <>
-              <button className="nav-link" onClick={() => navigate("/admin-dashboard")}>Dashboard</button>
-              <button className="nav-link" onClick={() => navigate("/admin-analytics")}>Analytics</button>
-              <button className="nav-link" onClick={() => navigate("/admin-operators")}>Operators</button>
+              <NavLink to="/admin-dashboard" className="nav-item">Dashboard</NavLink>
+              <NavLink to="/admin-analytics" className="nav-item">Analytics</NavLink>
+              <NavLink to="/admin-operators" className="nav-item">Operators</NavLink>
             </>
           )}
 
+          {/* Super Admin */}
           {user && (user.role === "super admin" || user.role === "superAdmin") && (
             <>
-              <button className="nav-link" onClick={() => navigate("/admin-dashboard")}>Dashboard</button>
-              <button className="nav-link" onClick={() => navigate("/admin-analytics")}>Analytics</button>
-              <button className="nav-link" onClick={() => navigate("/admin-operators")}>Operators</button>
+              <NavLink to="/admin-dashboard" className="nav-item">Dashboard</NavLink>
+              <NavLink to="/admin-analytics" className="nav-item">Analytics</NavLink>
+              <NavLink to="/admin-operators" className="nav-item">Operators</NavLink>
             </>
           )}
         </nav>
@@ -56,20 +57,19 @@ export default function Navbar({ user, onLogout }) {
           {user ? (
             <div className="user-menu">
               <span className="user-info">
-                {user.name}{" "}
-                <span className="user-role">({user.role})</span>
+                {user.name} <span className="user-role">({user.role})</span>
               </span>
 
               <button className="logout-btn" onClick={() => {
                   onLogout();
                   navigate("/login");
                 }}
-              > Logout </button>
+              >Logout</button>
             </div>
           ) : (
             <>
-              <button className="login-btn" onClick={() => navigate("/login")}> Login </button>
-              <button className="register-btn" onClick={() => navigate("/register")}> Register </button>
+              <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
+              <button className="register-btn" onClick={() => navigate("/register")}>Register</button>
             </>
           )}
         </div>
