@@ -22,7 +22,7 @@ import AdminAnalytics from "./pages/admin/AdminAnalytics";
 // Community Pages
 import CommunityList from "./pages/community/CommunityList";
 import CommunityCreate from "./pages/community/CommunityCreate";
-import CommunityDetails from "./pages/community/Communitydetails";
+import CommunityDetails from "./pages/community/CommunityDetails";
 
 export default function App() {
   const [user, setUser] = useState(null);
